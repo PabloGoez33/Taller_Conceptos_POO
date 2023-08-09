@@ -2,6 +2,7 @@ from modelo.vehiculo import Vehiculo
 from modelo.punto import Punto
 from modelo.rectangulo import Rectangulo
 from modelo.circulo import Circulo
+from modelo.carta import Carta
 
 def menu():
 
@@ -128,8 +129,44 @@ def opcion_4():
 
 def opcion_5():
 
+    print("----------------------------------")
+    print("               Carta              ")
+    print("----------------------------------\n")
+    print("Tipo de valor")
+    print("1. Numero\n2. Letra")
+    tipo_valor = int(input("Ingrese el tipo de valor que deseas ingresar: "))
+    if tipo_valor == 1:
+        valorN = int(input("Ingrese el valor de la carta (2-10): "))
+        print("\nPintas:")
+        print("1. Diamante\n2. Trebol\n3. Corazon\n4. Pica")
+        pinta = int(input("Ingrese el numero que corresponde a la pinta de la carta: "))
+        if pinta == 1:
+            carta = Carta(valor=valorN, pinta=Carta.PINTA_DIAMANTE)
+        if pinta == 2:
+            carta = Carta(valor=valorN, pinta=Carta.PINTA_TREBOL)
+        if pinta == 3:
+            carta = Carta(valor=valorN, pinta=Carta.PINTA_CORAZON)
+        if pinta == 4:
+            carta = Carta(valor=valorN, pinta=Carta.PINTA_PICA)
+        print(f"\nSu carta es un {carta.valor} de {carta.pinta}\n")
+    elif tipo_valor == 2:
+        valorL = input("Ingrese el valor de la carta (A, J, Q, K): ")
+        print("\nPintas:")
+        print("1. Diamante\n2. Trebol\n3. Corazon\n4. Pica")
+        pinta = int(input("Ingrese el numero que corresponde a la pinta de la carta: "))
+        if pinta == 1:
+            carta = Carta(valor=valorL, pinta=Carta.PINTA_DIAMANTE)
+        if pinta == 2:
+            carta = Carta(valor=valorL, pinta=Carta.PINTA_TREBOL)
+        if pinta == 3:
+            carta = Carta(valor=valorL, pinta=Carta.PINTA_CORAZON)
+        if pinta == 4:
+            carta = Carta(valor=valorL, pinta=Carta.PINTA_PICA)
+        print(f"\nSu carta es un {carta.valor} de {carta.pinta}\n")
+    else:
+        print("Opcion no valida.")
 
-    return
+    main()
 
 def opcion_6():
 
