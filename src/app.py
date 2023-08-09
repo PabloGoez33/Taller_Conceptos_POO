@@ -12,16 +12,16 @@ def menu():
     print("2. Puntos #2 y #3")
     print("3. Punto #4")
     print("4. Punto #5")
-    print("5. Punto #1")
-    print("6. Punto #1")
+    print("5. Punto #6")
+    print("6. Puntos #7, #8, #9, #10 y #11")
     print("7. Salir")
     print("---------------------------------------")
     opcion = int(input("Ingrese la opcion: "))
-    print("---------------------------------------")
+    print("---------------------------------------\n")
 
     return opcion
 
-def punto_1():
+def opcion_1():
 
     vel_max = int(input("Ingrese la velocidad maxima del vehivulo: "))
     kilome = int(input("Ingrese el kilometraje del vehiculo: "))
@@ -32,7 +32,7 @@ def punto_1():
 
     main()
 
-def punto_2():
+def opcion_2():
 
     pnt_x = int(input("Ingrese el punto en el eje x (Entero): "))
     pnt_y = int(input("Ingrese el punto en el eje y (Entero): "))
@@ -49,22 +49,38 @@ def punto_2():
     
     dist = input("Desea calcular la distancia entre dos puntos(y/n): ")
     if dist == "y":
-        pnt_x_2 = int(input("Ingrese el punto en el eje x (Entero): "))
-        pnt_y_2 = int(input("Ingrese el punto en el eje y (Entero): "))
+        pnt_x_2 = int(input("Ingrese el punto en el eje x de la segunda coordenada (Entero): "))
+        pnt_y_2 = int(input("Ingrese el punto en el eje y de la segunda coordenada (Entero): "))
         p2 = Punto(punto_x=pnt_x_2, punto_y=pnt_y_2)
         p2.mostrar_punto()
-        Punto.calcular_distancia(pnt_x, pnt_y, pnt_x_2, pnt_y_2)
+        distancia = p2.calcular_distancia(p1)
+        print(f"La distancia entre el punto ({p1.punto_x},{p1.punto_y}) y el punto ({p2.punto_x},{p2.punto_y}) es de {round(distancia,4)}")
 
     main()
 
-def punto_3():
+def opcion_3():
 
     print("----------------------------------")
     print("            Rectangulo            ")
     print("----------------------------------")
-    base = float(input("Ingrese la medida de la base del rectangulo: "))
-    alt = float(input("Ingrese la altura del rectangulo: "))
-    rect = Rectangulo(base=base, altura=alt)
+    pnt_x = int(input("Ingrese el punto en el eje x (Entero): "))
+    pnt_y = int(input("Ingrese el punto en el eje y (Entero): "))
+
+    p1 = Punto(punto_x=pnt_x, punto_y=pnt_y)
+
+    p1.mostrar_punto()
+
+    pnt_x = int(input("Ingrese el punto en el eje x de la segunda coordenada (Entero): "))
+    pnt_y = int(input("Ingrese el punto en el eje y de la segunda coordenada (Entero): "))
+
+    p2 = Punto(punto_x=pnt_x, punto_y=pnt_y)
+
+    p2.mostrar_punto()
+
+    bas = p1.calcular_base(p2)
+    altur = p1.calcular_altura(p2)
+    
+    rect = Rectangulo(base=bas, altura=altur)
     peri = input("\nHallar perimetro(y/n): ")
     if peri == "y":
         rect.perimetro_rectangulo()
@@ -77,12 +93,17 @@ def punto_3():
 
     main()
     
-def punto_4():
+def opcion_4():
 
     print("----------------------------------")
     print("          Circunferencia          ")
     print("----------------------------------")
-    cen = float(input("Ingrese las coordenadas del centro de la circunferencia: "))
+    pnt_x = int(input("Ingrese el punto del centro en el eje x (Entero): "))
+    pnt_y = int(input("Ingrese el punto del centro en el eje y (Entero): "))
+
+    cen = Punto(punto_x=pnt_x, punto_y=pnt_y)
+
+    cen.mostrar_punto()
     rad = float(input("Ingrese el radio de la circunferencia: "))
     circu = Circulo(radio=rad, centro=cen)
     peri = input("\nHallar perimetro(y/n): ")
@@ -91,19 +112,26 @@ def punto_4():
     are = input("\nHallar area(y/n): ")
     if are == "y":
         circu.area_circunferencia()
-    es_rect = input("\nDesea saber si el punto se encuentra dentro de la circunferencia(y/n): ")
-
+    es_rect = input("\nDesea saber si un punto se encuentra dentro de la circunferencia(y/n): ")
+    if es_rect == "y":
+        pnt_x = int(input("Ingrese el punto en el eje x (Entero): "))
+        pnt_y = int(input("Ingrese el punto en el eje y (Entero): "))
+        p2 = Punto(punto_x=pnt_x, punto_y=pnt_y)
+        p2.mostrar_punto()
+        distancia = p2.calcular_distancia(cen)
+        if distancia > rad:
+            print(f"El punto ({p2.punto_x},{p2.punto_y}) no hace parte de la circunferencia ya que la distancia al centro es {round(distancia,4)} la cual es mayor al radio {rad}")
+        else:
+            print(f"El punto ({p2.punto_x},{p2.punto_y}) hace parte de la circunferencia ya que la distancia al centro es {round(distancia,4)} la cual es menor/igual al radio {rad}")
 
     main()
 
-    return
-
-def punto_5():
+def opcion_5():
 
 
     return
 
-def punto_6():
+def opcion_6():
 
 
     return
@@ -112,16 +140,16 @@ def main():
 
     opcion = menu()
     if opcion == 1:
-        punto_1()
+        opcion_1()
     if opcion == 2:
-        punto_2()
+        opcion_2()
     if opcion == 3:
-        punto_3()
+        opcion_3()
     if opcion == 4:
-        punto_4()
+        opcion_4()
     if opcion == 5:
-        punto_5()
+        opcion_5()
     if opcion == 6:
-        punto_6()
+        opcion_6()
 
 main() 
