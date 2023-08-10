@@ -3,6 +3,7 @@ from modelo.punto import Punto
 from modelo.rectangulo import Rectangulo
 from modelo.circulo import Circulo
 from modelo.carta import Carta
+from modelo.cuentabancaria import CuentaBancaria
 
 def menu():
 
@@ -170,8 +171,44 @@ def opcion_5():
 
 def opcion_6():
 
+    import random
 
-    return
+    print("----------------------------------")
+    print("          Cuenta Bancaria         ")
+    print("----------------------------------")
+    print("Creando cuenta...")
+    propietario = input("Ingrese su nombre: ")
+    cuenta = random.randint(100, 999)
+    print(f"El numero de cuenta asignado es {cuenta}")
+    balance = int(input("Balance inicio de cuenta: "))
+
+    cuenta_bancaria = CuentaBancaria(numero_cuenta=cuenta, propietario=propietario, balance=balance)
+
+    ver_cuenta = input("\nDesea ver la cuenta (y/n): ")
+    if ver_cuenta == "y":
+        cuenta_bancaria.mostrar_detalles()
+
+    depositar = input("\nDesea realizar un deposito (y/n): ")
+    if depositar == "y":
+        cantidad_dep = int(input("\nCantidad deposito: "))
+        cuenta_dep = int(input("Cuenta del deposito: "))
+        cuenta_bancaria.depositar(cantidad=cantidad_dep, cuenta_depo=cuenta_dep)
+
+    retirar = input("\nDesea retirar (y/n): ")
+    if retirar == "y":
+        cantidad_ret = int(input("Ingrese la cantidad que deseas retirar: "))
+        cuenta_ret = int(input("Cuenta de donde se realizara el retiro: "))
+        cuenta_bancaria.retirar(cantidad=cantidad_ret, cuenta_reti=cuenta_ret)
+
+    cuota_manejo = input("\nDesea aplicar la cuota de manejo (y/n): ")
+    if cuota_manejo == "y":
+        cuenta_bancaria.aplicar_cuota_manejo()
+    
+    ver_cuenta = input("\nDesea ver la cuenta (y/n): ")
+    if ver_cuenta == "y":
+        cuenta_bancaria.mostrar_detalles()
+
+    main()
 
 def main():
 
